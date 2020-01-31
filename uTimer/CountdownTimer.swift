@@ -36,6 +36,7 @@ final class CountdownTimer: Codable {
     }
     
     init(name: String, initialDuration: Double, durationSeconds: Double, state: TimerState = .new) {
+        // create initializer
         self.name = name
         self.initialDuration = initialDuration
         self.duration = durationSeconds
@@ -51,18 +52,27 @@ final class CountdownTimer: Codable {
         case .paused:
             endTime = nil
         }
-        print("init")
         NotificationCenter.default.addObserver(self, selector: #selector(receivePulse), name: .Pulse, object: nil)
     }
     
     init(name: String, initialDuration: Double, endTime: TimeInterval, state: TimerState) {
+        // restore initializer
         self.name = name
         self.initialDuration = initialDuration
         self.duration = (endTime - NSDate().timeIntervalSince1970).rounded()
         
         // todo: determine what the state should be depending on the remaining duration
-        self.state = state
-        print("restore")
+        if state == .running {
+            // if the timer is running, determine whether it should be ended if the endtime is before current time.
+            if NSDate().timeIntervalSince1970 > endTime {
+                self.state = .ended
+                self.duration = 0
+            } else {
+                self.state = .running
+            }
+        } else {
+            self.state = state
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(receivePulse), name: .Pulse, object: nil)
     }
     
@@ -122,6 +132,10 @@ final class CountdownTimer: Codable {
         }
     }
     
+    private func end() {
+        state = .ended
+    }
+    
     @objc private func receivePulse() {
         // TODO: placeholder code
         // the viewcontroller will update itself based on pulse
@@ -129,8 +143,9 @@ final class CountdownTimer: Codable {
         // update status based on if the timer has ended.
         if state == .running {
             duration -= 1
-            if duration == 55.0 {
-                let _ = pause()
+            if duration <= 0 {
+                duration = 0
+                end()
             }
             print(duration)
         }

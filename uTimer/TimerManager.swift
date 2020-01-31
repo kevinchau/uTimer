@@ -128,6 +128,15 @@ class TimerManager {
     // 2: rearrange timers
     // 3: get a reference to all timers
     // 4: delete timers
+    func deleteTimer(index: Int) {
+        let timer = timers[index]
+        DispatchQueue.main.async {
+            timer.delete()
+            self.timers.remove(at: index)
+            self.notifyChanged(timer)
+        }
+        
+    }
     // actual timer functions should be controlling the timer directly
     
     private func encodeToJson(_ codableArray: [CountdownTimer]) throws -> String? {
