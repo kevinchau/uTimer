@@ -62,6 +62,7 @@ class TimerManager {
         // Also, every time a single timer state is changed, we need to update our userdefaults.
         // new pulse:
         pulse = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(sendPulse), userInfo: nil, repeats: true)
+        RunLoop.main.add(pulse, forMode: .common)
         timers.removeAll()
         //testing:
         do {

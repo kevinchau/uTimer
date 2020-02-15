@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // No Storyboard
         window = UIWindow(frame: UIScreen.main.bounds)
         let v = NavigationController()
-        v.setViewControllers([TimerCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())], animated: true)
+        v.setViewControllers([TimerTableViewController()], animated: true)
         window?.rootViewController = v
         window?.makeKeyAndVisible()
         // End No Storyboard

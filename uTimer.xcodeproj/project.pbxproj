@@ -16,8 +16,8 @@
 		0A36190A235BF54400CBAB4C /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A361909235BF54400CBAB4C /* TimerState.swift */; };
 		0A36190C235C088F00CBAB4C /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A36190B235C088F00CBAB4C /* TimerManager.swift */; };
 		0A3FFA78235D2D6A00268118 /* TimerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FFA77235D2D6A00268118 /* TimerInterface.swift */; };
-		0A3FFA7A235E6B4900268118 /* TimerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FFA79235E6B4900268118 /* TimerCollectionViewController.swift */; };
-		0A8F14C9239C6AAD00691A2C /* CountdownTimerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8F14C8239C6AAD00691A2C /* CountdownTimerCollectionViewCell.swift */; };
+		0A3FFA7A235E6B4900268118 /* TimerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FFA79235E6B4900268118 /* TimerTableViewController.swift */; };
+		0A8F14C9239C6AAD00691A2C /* CountdownTimerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8F14C8239C6AAD00691A2C /* CountdownTimerTableViewCell.swift */; };
 		0AEFDC6523652744006F93CA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFDC6423652744006F93CA /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,8 +33,8 @@
 		0A361909235BF54400CBAB4C /* TimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
 		0A36190B235C088F00CBAB4C /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		0A3FFA77235D2D6A00268118 /* TimerInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerInterface.swift; sourceTree = "<group>"; };
-		0A3FFA79235E6B4900268118 /* TimerCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewController.swift; sourceTree = "<group>"; };
-		0A8F14C8239C6AAD00691A2C /* CountdownTimerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerCollectionViewCell.swift; sourceTree = "<group>"; };
+		0A3FFA79235E6B4900268118 /* TimerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewController.swift; sourceTree = "<group>"; };
+		0A8F14C8239C6AAD00691A2C /* CountdownTimerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerTableViewCell.swift; sourceTree = "<group>"; };
 		0AEFDC6423652744006F93CA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,9 +76,9 @@
 				0A361907235BF48E00CBAB4C /* CountdownTimer.swift */,
 				0A361909235BF54400CBAB4C /* TimerState.swift */,
 				0A3FFA77235D2D6A00268118 /* TimerInterface.swift */,
-				0A3FFA79235E6B4900268118 /* TimerCollectionViewController.swift */,
+				0A3FFA79235E6B4900268118 /* TimerTableViewController.swift */,
 				0AEFDC6423652744006F93CA /* Constants.swift */,
-				0A8F14C8239C6AAD00691A2C /* CountdownTimerCollectionViewCell.swift */,
+				0A8F14C8239C6AAD00691A2C /* CountdownTimerTableViewCell.swift */,
 				0A1B011123D76EDF00FFDA80 /* NavigationController.swift */,
 				0A1B011323D784A200FFDA80 /* NewTimerViewController.swift */,
 			);
@@ -155,11 +155,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A8F14C9239C6AAD00691A2C /* CountdownTimerCollectionViewCell.swift in Sources */,
+				0A8F14C9239C6AAD00691A2C /* CountdownTimerTableViewCell.swift in Sources */,
 				0A3618F4235BF43300CBAB4C /* AppDelegate.swift in Sources */,
 				0A36190C235C088F00CBAB4C /* TimerManager.swift in Sources */,
 				0A1B011423D784A200FFDA80 /* NewTimerViewController.swift in Sources */,
-				0A3FFA7A235E6B4900268118 /* TimerCollectionViewController.swift in Sources */,
+				0A3FFA7A235E6B4900268118 /* TimerTableViewController.swift in Sources */,
 				0A1B011223D76EDF00FFDA80 /* NavigationController.swift in Sources */,
 				0A36190A235BF54400CBAB4C /* TimerState.swift in Sources */,
 				0AEFDC6523652744006F93CA /* Constants.swift in Sources */,

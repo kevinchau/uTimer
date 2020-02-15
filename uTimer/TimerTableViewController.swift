@@ -12,7 +12,8 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class TimerCollectionViewController: UICollectionViewController {
+
+class TimerTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,10 @@ class TimerCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(CountdownTimerCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.tableView!.register(CountdownTimerTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        
+        // set estimated row height
+        self.tableView!.estimatedRowHeight = 50
 
         // Do any additional setup after loading the view.
         title = "Timers"
@@ -36,8 +40,7 @@ class TimerCollectionViewController: UICollectionViewController {
     
     @objc func refresh() {
         DispatchQueue.main.async {
-            self.collectionView.reloadData()
-            print("viewDidAppear")
+            self.tableView.reloadData()
         }
         
     }
@@ -52,31 +55,41 @@ class TimerCollectionViewController: UICollectionViewController {
     }
     */
 
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return TimerManager.shared.timers.count
     }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
-        if let timerCell = cell as? CountdownTimerCollectionViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        
+        if let timerCell = cell as? CountdownTimerTableViewCell {
             timerCell.timerIndex = indexPath.row
             timerCell.loadView()
             return timerCell
         }
-    
+        
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            TimerManager.shared.deleteTimer(index: indexPath.row)
+            completionHandler(true)
+        }
+        
+        action.backgroundColor = .red
+        action.image = UIImage(systemName: "trash")
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
+
     @objc private func addTimer() {
         let vc = UINavigationController()
         let vc2 = NewTimerViewController()
@@ -119,7 +132,7 @@ class TimerCollectionViewController: UICollectionViewController {
 
 }
 
-extension TimerCollectionViewController: NewTimerDelegate {
+extension TimerTableViewController: NewTimerDelegate {
     func timerAdded() {
         return
     }

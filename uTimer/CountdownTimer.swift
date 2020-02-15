@@ -76,6 +76,14 @@ final class CountdownTimer: Codable {
         NotificationCenter.default.addObserver(self, selector: #selector(receivePulse), name: .Pulse, object: nil)
     }
     
+    func startPause() {
+        switch state {
+        case .paused: start()
+        case .running: pause()
+        default: break
+        }
+    }
+    
     func start() -> Bool {
         // TODO: create notification
         switch state {
