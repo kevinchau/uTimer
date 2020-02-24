@@ -10,8 +10,19 @@ import UIKit
 
 class CountdownTimerTableViewCell: UITableViewCell {
     
-    var timerIndex: Int!
+    var timerIndex: Int! {
+        didSet {
+            currentState = TimerManager.shared.timers[exist: timerIndex]?.state
+        }
+    }
     var display = UILabel()
+    var currentState: TimerState? {
+        didSet {
+            if currentState != oldValue {
+               buttonSetup()
+            }
+        }
+    }
     
     private let startPauseButton = UIButton()
     private let resetButton = UIButton()
@@ -34,12 +45,15 @@ class CountdownTimerTableViewCell: UITableViewCell {
         contentView.addSubview(startPauseButton)
         startPauseButton.translatesAutoresizingMaskIntoConstraints = false
         startPauseButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        startPauseButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.8).isActive = true
+        startPauseButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         startPauseButton.widthAnchor.constraint(equalTo: startPauseButton.heightAnchor, multiplier: 1.0).isActive = true
         startPauseButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
-        startPauseButton.setTitle("startPause", for: .normal)
-        startPauseButton.setTitleColor(.black, for: .normal)
+        startPauseButton.setTitleColor(.white, for: .normal)
+        startPauseButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        startPauseButton.layer.cornerRadius = 0.5 * 40
+        startPauseButton.clipsToBounds = true
         startPauseButton.addTarget(self, action: #selector(startPauseAction), for: .touchUpInside)
+        buttonSetup()
         
         /*
          timerButton.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +90,32 @@ class CountdownTimerTableViewCell: UITableViewCell {
     
     @objc private func startPauseAction() {
         if let timer = TimerManager.shared.timers[exist: timerIndex] {
-            timer.startPause()
+            switch timer.state {
+            case .running, .paused:
+                timer.startPause()
+            case .ended:
+                timer.restart()
+            default: break
+            }
+        }
+    }
+    
+    private func buttonSetup() {
+        DispatchQueue.main.async {
+            if let timer = TimerManager.shared.timers[exist: self.timerIndex] {
+                switch timer.state {
+                case .running:
+                    self.startPauseButton.backgroundColor = UIColor.red
+                    self.startPauseButton.setTitle("Pause", for: .normal)
+                case .paused:
+                    self.startPauseButton.backgroundColor = UIColor.green
+                    self.startPauseButton.setTitle("Resume", for: .normal)
+                case .new: break
+                case .ended:
+                    self.startPauseButton.backgroundColor = UIColor.blue
+                    self.startPauseButton.setTitle("Restart", for: .normal)
+                }
+            }
         }
     }
     

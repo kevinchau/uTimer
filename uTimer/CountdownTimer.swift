@@ -43,36 +43,48 @@ final class CountdownTimer: Codable {
         self.state = state
         switch state {
         case .new:
-            endTime = nil
+            endTime = durationSeconds
         case .running:
             endTime = NSDate().timeIntervalSince1970 + duration
             // TODO: create notification
         case .ended:
             endTime = nil
         case .paused:
-            endTime = nil
+            endTime = durationSeconds
         }
         NotificationCenter.default.addObserver(self, selector: #selector(receivePulse), name: .Pulse, object: nil)
     }
     
-    init(name: String, initialDuration: Double, endTime: TimeInterval, state: TimerState) {
+    init(name: String, initialDuration: Double, endTime: TimeInterval, state: TimerState, duration: Double) {
+        print("resume init" + " \(initialDuration)" + " \(endTime)" + " \(state)")
         // restore initializer
         self.name = name
         self.initialDuration = initialDuration
-        self.duration = (endTime - NSDate().timeIntervalSince1970).rounded()
-        
+        print(endTime)
+        print(NSDate().timeIntervalSince1970)
         // todo: determine what the state should be depending on the remaining duration
-        if state == .running {
-            // if the timer is running, determine whether it should be ended if the endtime is before current time.
+        switch state {
+        case .running:
+            
             if NSDate().timeIntervalSince1970 > endTime {
-                self.state = .ended
                 self.duration = 0
+                self.state = .ended
             } else {
+                self.duration = (endTime - NSDate().timeIntervalSince1970).rounded()
                 self.state = .running
             }
-        } else {
-            self.state = state
+        case .paused:
+            self.duration = duration
+            self.state = .paused
+        case .ended:
+            self.duration = 0
+            self.state = .ended
+        case .new:
+            self.state = .new
+            self.duration = initialDuration
+            
         }
+
         NotificationCenter.default.addObserver(self, selector: #selector(receivePulse), name: .Pulse, object: nil)
     }
     

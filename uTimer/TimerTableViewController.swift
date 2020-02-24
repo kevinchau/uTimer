@@ -26,8 +26,8 @@ class TimerTableViewController: UITableViewController {
         // Register cell classes
         self.tableView!.register(CountdownTimerTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         
-        // set estimated row height
-        self.tableView!.estimatedRowHeight = 50
+        // set row height
+        self.tableView!.rowHeight = 50
 
         // Do any additional setup after loading the view.
         title = "Timers"

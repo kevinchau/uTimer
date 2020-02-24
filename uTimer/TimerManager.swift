@@ -72,7 +72,7 @@ class TimerManager {
                         print("resumed: " + string)
                         
                         for timer in storedTimers {
-                            let restoredTimer = CountdownTimer(name: timer.name, initialDuration: timer.initialDuration, endTime: timer.endTime ?? NSDate().timeIntervalSince1970, state: timer.state)
+                            let restoredTimer = CountdownTimer(name: timer.name, initialDuration: timer.initialDuration, endTime: timer.endTime ?? NSDate().timeIntervalSince1970, state: timer.state, duration: timer.duration)
                             timers.append(restoredTimer)
                         }
                         
@@ -115,7 +115,7 @@ class TimerManager {
     @objc private func sendPulse() {
         // Sends the second pulse that everything in the app will subscribe to
         NotificationCenter.default.post(name: .Pulse, object: nil)
-        print("pulse")
+//        print("pulse")
     }
     
     // what should we be able to do here?
