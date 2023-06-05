@@ -49,7 +49,7 @@ class NewTimerViewController: UIViewController {
     }
     
     @objc private func done() {
-        TimerManager.shared.createTimer(name: "Test Timer", initialDuration: picker.countDownDuration, state: .running)
+        let _ = TimerManager.shared.createTimer(name: "Test Timer", initialDuration: picker.countDownDuration, state: .running)
         dismiss(animated: true, completion: nil)
     }
     

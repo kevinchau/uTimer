@@ -55,24 +55,6 @@ class CountdownTimerTableViewCell: UITableViewCell {
         startPauseButton.addTarget(self, action: #selector(startPauseAction), for: .touchUpInside)
         buttonSetup()
         
-        /*
-         timerButton.translatesAutoresizingMaskIntoConstraints = false
-         timerButton.topAnchor.constraint(lessThanOrEqualTo: timePicker.bottomAnchor, constant: 20).isActive = true
-         timerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-         timerButton.widthAnchor.constraint(equalToConstant: buttonSize).isActive = true
-         timerButton.heightAnchor.constraint(equalToConstant: buttonSize).isActive = true
-         if #available(iOS 11.0, *) {
-             timerButton.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -78).isActive = true
-         } else {
-             timerButton.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -78).isActive = true
-         }
-         timerButton.layer.cornerRadius = 0.5 * buttonSize
-         timerButton.setTitleColor(UIColor.white, for: .normal)
-         timerButton.clipsToBounds = true
-         timerButton.addTarget(self, action: #selector(timerToggle), for: .touchUpInside)
-         */
-        
-        
     }
     
     override func prepareForReuse() {
@@ -94,7 +76,7 @@ class CountdownTimerTableViewCell: UITableViewCell {
             case .running, .paused:
                 timer.startPause()
             case .ended:
-                timer.restart()
+                let _ = timer.restart()
             default: break
             }
         }
@@ -118,19 +100,6 @@ class CountdownTimerTableViewCell: UITableViewCell {
             }
         }
     }
-    
-    /*
-    private func buttonSetup() {
-        if sleepTimer.timerIsRunning == false {
-            timerButton.backgroundColor = UIColor(red: 0.554, green: 0.785, blue: 0.215, alpha: 1.0)
-            timerButton.setTitle(NSLocalizedString("Sleep", comment: "Sleep Button"), for: .normal)
-        }
-        else {
-            timerButton.backgroundColor = UIColor(red: 1.0, green: 0.587, blue: 0.325, alpha: 1.0)
-            timerButton.setTitle(NSLocalizedString("Cancel", comment: "Sleep Button"), for: .normal)
-        }
-    }
- */
     
     
 }

@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // No Storyboard
         window = UIWindow(frame: UIScreen.main.bounds)
-        let v = NavigationController()
+        let v = UINavigationController()
         v.setViewControllers([TimerTableViewController()], animated: true)
         window?.rootViewController = v
         window?.makeKeyAndVisible()

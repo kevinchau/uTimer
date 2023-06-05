@@ -36,6 +36,12 @@ class TimerTableViewController: UITableViewController {
         
         // test, delete
 //        let _ = TimerManager.shared.createTimer(name: "test timer", initialDuration: 60, state: .running)
+        
+        // Request Notifications
+        // TODO: Move this somewhere else
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in
+            
+        }
     }
     
     @objc func refresh() {

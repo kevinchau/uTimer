@@ -9,6 +9,7 @@
 
 import Foundation
 import UserNotifications
+import AVFoundation
 
 final class CountdownTimer: Codable {
     private (set) var name: String
@@ -90,8 +91,8 @@ final class CountdownTimer: Codable {
     
     func startPause() {
         switch state {
-        case .paused: start()
-        case .running: pause()
+        case .paused: let _ = start()
+        case .running: let _ = pause()
         default: break
         }
     }
@@ -154,6 +155,8 @@ final class CountdownTimer: Codable {
     
     private func end() {
         state = .ended
+        // play sound
+        AudioServicesPlaySystemSound(SystemSoundID(1325))
     }
     
     @objc private func receivePulse() {
